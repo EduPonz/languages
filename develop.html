@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/quiz.js"></script>
+	</head>
+	<body onload="onCreate()">
+
+		<h2 id="title"></h2>
+
+		<form>
+			<label for="username">Username: </label>
+			<input type="text" name="username" id="username"><br>
+			<label for="password">Password: </label>
+			<input type="password" name="password" id="password"><br>
+			<label for="confirm_password">Confirm Password: </label>
+			<input type="password" name="confirm_password" id="confirm_password"><br>
+			<label for="e_mail">E-mail: </label>
+			<input type="text" name="e_mail" id="e_mail"><br><br>
+			<input type="button" onclick="insert_user()" value="Submit">
+			<!-- <input type="button" onclick="isCorrect()" value="Answer"> -->
+			<!-- <input type="button" onclick="seeAnswer()" value="See Answer"> -->
+		</form>
+
+		<p id="result"></p>
+
+		<!-- <script>onCreate();</script> -->
+
+	</body>
+</html>
