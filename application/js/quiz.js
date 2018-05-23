@@ -3,6 +3,7 @@ function onCreate() {
 	document.getElementById("signup_title").innerHTML = "Sign up";
 	document.getElementById("loging_title").innerHTML = "Log in";
 	document.getElementById("update_user_title").innerHTML = "Update user";
+	document.getElementById("insert_verb_title").innerHTML = "Insert verb";
 	create_tables();
 }
 
@@ -103,6 +104,7 @@ function insert_user() {
 		url += '&username=' + encodeURIComponent(username);
 		url += '&password=' + encodeURIComponent(password);
 		url += '&email=' + encodeURIComponent(e_mail);
+		console.log(url)
 		callAjax(url, requestCallback);
 	}
 }
@@ -140,4 +142,30 @@ function update_user() {
 		url += '&new_email=' + encodeURIComponent(new_email);
 		callAjax(url, requestCallback);
 	}
+}
+
+function insert_verb() {
+	var infinitive = document.getElementById("verb_infinitive").value.toLowerCase().trim().replace(" ", "%20");
+	var present = document.getElementById("verb_present").value.toLowerCase().trim().replace(" ", "%20");
+	var past = document.getElementById("verb_past").value.toLowerCase().trim().replace(" ", "%20");
+	var present_perfect = document.getElementById("verb_present_perf").value.toLowerCase().trim().replace(" ", "%20");
+	var infinitive_eng = document.getElementById("verb_infinitive_eng").value.toLowerCase().trim().replace(" ", "%20");
+
+	var url;
+	url = '/cgi-bin/db_manager.py?';
+	url += 'insert_verb=' + infinitive_eng;
+	url += '&verb_infinitive=' + infinitive;
+	url += '&verb_present=' + present;
+	url += '&verb_past=' + past;
+	url += '&verb_present_perf=' + present_perfect;
+
+	console.log(infinitive)
+	console.log(present)
+	console.log(past)
+	console.log(present_perfect)
+	console.log(infinitive_eng)
+	console.log(url)
+	console.log('to cgi')
+
+	callAjax(url, requestCallback);	
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="js/quiz.js"></script>
+		<script src="js/quiz.js" charset="UTF-8"></script>
 	</head>
 	<body onload="onCreate()">
 
@@ -17,7 +17,7 @@
 			<input type="password" name="confirm_password" id="confirm_password"><br>
 			<label for="e_mail">E-mail: </label>
 			<input type="text" name="e_mail" id="e_mail"><br><br>
-			<input type="button" onclick="insert_user()" value="Submit">
+			<input type="button" onclick="insert_user()" value="Sign up">
 			<!-- <input type="button" onclick="isCorrect()" value="Answer"> -->
 			<!-- <input type="button" onclick="seeAnswer()" value="See Answer"> -->
 		</form>
@@ -30,7 +30,7 @@
 			<input type="text" name="username_login" id="username_login"><br>
 			<label for="password_login">Password: </label>
 			<input type="password" name="password_login" id="password_login"><br><br>
-			<input type="button" onclick="check_login()" value="Submit">
+			<input type="button" onclick="check_login()" value="Log in">
 		</form>
 
 		<p id="result_login"></p><br><br>
@@ -49,12 +49,27 @@
 			<input type="password" name="update_new_confirm_pwd" id="update_new_confirm_pwd"><br>
 			<label for="update_new_e_mail">New e-mail: </label>
 			<input type="text" name="update_new_e_mail" id="update_new_e_mail"><br><br>
-			<input type="button" onclick="update_user()" value="Submit">
-			<!-- <input type="button" onclick="isCorrect()" value="Answer"> -->
-			<!-- <input type="button" onclick="seeAnswer()" value="See Answer"> -->
+			<input type="button" onclick="update_user()" value="Update">
 		</form>
 
 		<p id="update_result"></p><br><br>
+
+		<h3 id="insert_verb_title"></h3>
+		<form>
+			<label for="verb_infinitive">Infinitive: </label>
+			<input type="text" name="verb_infinitive" id="verb_infinitive"><br>
+			<label for="verb_present">Present: </label>
+			<input type="text" name="verb_present" id="verb_present"><br>
+			<label for="verb_past">Past: </label>
+			<input type="text" name="verb_past" id="verb_past"><br>
+			<label for="verb_present_perf">Present perfect: </label>
+			<input type="text" name="verb_present_perf" id="verb_present_perf"><br>
+			<label for="verb_infinitive_eng">Infinitive in english: </label>
+			<input type="text" name="verb_infinitive_eng" id="verb_infinitive_eng"><br>
+			<input type="button" onclick="insert_verb()" value="Insert"><br><br>
+		</form>
+
+		<p id="insert_verb_result"></p><br><br>
 
 	</body>
 </html>

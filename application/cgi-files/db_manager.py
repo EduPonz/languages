@@ -56,10 +56,11 @@ def create_verbs_table(table_name):
                    COLUMN_TIMES_ASKED + ' TEXT, ' +
                    COLUMN_TIMES_RIGHT + ' TEXT)')
 
-        output('Table "' + table_name + '" created!')
+        return True
     except Exception as e:
         output('Table "' + table_name + '" NOT created. ' +
                'Exception {}'.format(e))
+        return False
 
 
 def create_nouns_table(table_name):
@@ -80,10 +81,11 @@ def create_nouns_table(table_name):
                    COLUMN_TIMES_ASKED + ' TEXT, ' +
                    COLUMN_TIMES_RIGHT + ' TEXT)')
 
-        output('Table "' + table_name + '" created!')
+        return True
     except Exception as e:
         output('Table "' + table_name + '" NOT created. ' +
                'Exception {}'.format(e))
+        return False
 
 
 def create_users_table(table_name):
@@ -97,10 +99,11 @@ def create_users_table(table_name):
                    COLUMN_PASSWORD + ' TEXT NOT NULL, ' +
                    COLUMN_EMAIL + ' TEXT NOT NULL)')
 
-        output('Table "' + table_name + '" created!')
+        return True
     except Exception as e:
         output('Table "' + table_name + '" NOT created. ' +
                'Exception {}'.format(e))
+        return False
 
 
 def insert_user(username, password, e_mail):
@@ -119,11 +122,12 @@ def insert_user(username, password, e_mail):
                        params)
 
             db.commit()
-            output('User inserted!')
+            return True
         else:
-            output('User already exists!')
+            return False
     except Exception as e:
         output('Cannot insert user. Exception {}'.format(e))
+        return False
 
 
 def check_username_availability(username):
@@ -151,14 +155,12 @@ def check_login(username, password):
                        ' WHERE ' + COLUMN_USERNAME + ' = "' + username +
                        '" AND ' + COLUMN_PASSWORD + ' = "' + password + '"')
         if len(cursor.fetchall()) > 0:
-            output('login correct')
             return True
         else:
-            output('login not correct')
             return False
     except Exception as e:
         output('Cannot check login. Exception {}'.format(e))
-        return None
+        return False
 
 
 def get_user_id(username):
@@ -187,13 +189,41 @@ def update_user(user_id, new_username, new_password, new_email):
                        ' WHERE ' + COLUMN_USER_ID + ' = ?',
                        params)
         db.commit()
-        output('User updated!')
+        return True
     except Exception as e:
         output('Cannot update user. Exception {}'.format(e))
+        return False
+
+
+def insert_verb(infinitive, infinitive_eng, present, past,
+                present_perfect):
+    """."""
+    output('insert_verb() 1')
+    params = (infinitive, infinitive_eng, present, past,
+              present_perfect)
+    try:
+        output('insert_verb() 2')
+        db.execute('INSERT INTO ' + TABLE_VERBS + ' (' +
+                   COLUMN_INFITIVE + ', ' +
+                   COLUMN_PRESENT + ', ' +
+                   COLUMN_PAST + ', ' +
+                   COLUMN_PRESENT_PERFECT + ', ' +
+                   COLUMN_INFITIVE_ENGLISH + ') ' +
+                   ' VALUES (?,?,?,?,?)',
+                   params)
+        output('insert_verb() 3')
+        db.commit()
+        output('insert_verb() 4')
+        return True
+    except Exception as e:
+        output('insert_verb() 5')
+        output('Cannot insert user. Exception {}'.format(e))
+        return False
 
 
 form = cgi.FieldStorage()
-db_path = '/var/www/html/languages/database/danish.db'
+output('form {}'.format(form))
+db_path = '/var/www/html/languages/application/database/danish.db'
 db = sqlite3.connect(db_path)
 cursor = db.cursor()
 
@@ -202,11 +232,14 @@ try:
         table_name = str(form['create table'].value)
 
         if table_name == 'verbs':
-            create_verbs_table(table_name)
+            if create_verbs_table(table_name):
+                output('Table "' + table_name + '" created!')
         elif table_name == 'nouns':
-            create_nouns_table(table_name)
+            if create_nouns_table(table_name):
+                output('Table "' + table_name + '" created!')
         elif table_name == 'users':
-            create_users_table(table_name)
+            if create_users_table(table_name):
+                output('Table "' + table_name + '" created!')
 
     elif 'insert' in form:
         table_name = str(form['insert'].value)
@@ -215,7 +248,10 @@ try:
             username = str(form['username'].value)
             password = str(form['password'].value)
             e_mail = str(form['email'].value)
-            insert_user(username, password, e_mail)
+            if insert_user(username, password, e_mail):
+                output('User inserted!')
+            else:
+                output('User already exists!')
 
     elif 'login' in form:
 
@@ -231,6 +267,10 @@ try:
             create_verbs_table(table_verbs)
             create_nouns_table(table_nouns)
 
+            output('login correct')
+        else:
+            output('login NOT correct')
+
     elif 'update_user' in form:
         username = str(form['username'].value)
         password = str(form['password'].value)
@@ -240,7 +280,32 @@ try:
             new_username = str(form['new_username'].value)
             new_password = str(form['new_password'].value)
             new_email = str(form['new_email'].value)
-            update_user(user_id, new_username, new_password, new_email)
+            if update_user(user_id, new_username, new_password, new_email):
+                output('User updated!')
+            else:
+                output('User NOT updated!')
+
+    elif 'insert_verb' in form:
+        output('insert_verb 1')
+        output('form {}'.format(form['insert_verb']))
+        infinitive_eng = str(form['insert_verb'].value)
+        output(infinitive_eng)
+        infinitive = str(form['verb_infinitive'].value)
+        output(infinitive)
+        present = str(form['verb_present'].value)
+        output(present)
+        past = str(form['verb_past'].value)
+        output(past)
+        present_perfect = str(form['verb_present_perf'].value)
+        output(present_perfect)
+
+        if (insert_verb(infinitive, infinitive_eng, present, past,
+                        present_perfect) is True):
+            output('insert_verb 2')
+            output('Verb inserted')
+        else:
+            output('insert_verb 3')
+            output('Verb NOT inserted')
 
 except:
     pass
