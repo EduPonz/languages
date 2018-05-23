@@ -14,6 +14,7 @@ COLUMN_PRESENT = 'present'
 COLUMN_PAST = 'past'
 COLUMN_PRESENT_PERFECT = 'present_perfect'
 COLUMN_INFITIVE_ENGLISH = 'infinitive_english'
+COLUMN_TOPIC = 'topic'
 COLUMN_TIMES_ASKED = 'times_asked'
 COLUMN_TIMES_RIGHT = 'times_right'
 
@@ -51,6 +52,7 @@ def create_verbs_table(table_name):
                    COLUMN_PAST + ' TEXT NOT NULL, ' +
                    COLUMN_PRESENT_PERFECT + ' TEXT NOT NULL, ' +
                    COLUMN_INFITIVE_ENGLISH + ' TEXT NOT NULL, ' +
+                   COLUMN_TOPIC + ' TEXT NOT NULL, ' +
                    COLUMN_TIMES_ASKED + ' TEXT, ' +
                    COLUMN_TIMES_RIGHT + ' TEXT)')
 
@@ -74,6 +76,7 @@ def create_nouns_table(table_name):
                    COLUMN_PLURAL_ENG + ' TEXT NOT NULL, ' +
                    COLUMN_PLURAL_DEF_DAN + ' TEXT NOT NULL, ' +
                    COLUMN_PLURAL_DEF_ENG + ' TEXT NOT NULL, ' +
+                   COLUMN_TOPIC + ' TEXT NOT NULL, ' +
                    COLUMN_TIMES_ASKED + ' TEXT, ' +
                    COLUMN_TIMES_RIGHT + ' TEXT)')
 
