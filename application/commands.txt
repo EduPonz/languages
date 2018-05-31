@@ -1,0 +1,1 @@
+pscp -scp -r -pw e11235813 C:\Users\dda\Documents\Cristi\CMPalomares\Coding\languages\application\* edu@192.168.0.21:/var/www/html/languages/application
