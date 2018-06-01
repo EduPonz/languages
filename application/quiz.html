@@ -2,12 +2,14 @@
 <html>
 	<head>
 		<script src="js/quiz.js"></script>
+		<!-- for calling the style sheet-->
+		<link rel="stylesheet" type="text/css" href="style.css"> 
 	</head>
-	<body onload="onCreate()">
+	<body onload="onCreate()" bgcolor="#ccffff">
 
 		<h2 id="title"></h2>
-		<p>Edu feito:</p>
-
+		<p >Edu feito:</p>
+		<hr>
 		<form action="/check.js">
 			<p id="word">Hej</p>
 			<input type="text" name="answer" id="answer"><br><br>
