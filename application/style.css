@@ -1,3 +1,7 @@
+	head {
+
+	}
+
 	body{
 		background-image: url("bg4.jpg");
 		background-color: #cccccc
@@ -6,12 +10,27 @@
 	}
 
 	h2{
-		background-color: rgb(194, 234, 240,0.2);
-		style: font-family:courier;
-		<p> 
-		<hr>
-		<form action="/check.js">
-			style: font-size:px;
-		</form>
+
 	}
+
+	p{
+		font-family:cursive;
+		border: 1px solid black;
+		margin-top: 25px;
+		margin-bottom: 25px;
+		margin-right: 1100px;
+		margin-left: 2px;
+	}
+	hr{
+		margin-right: 1100px;
+		margin-left: 2px;	
+	}
+
+	form{
+
+		
+		
+	}
+
+	
 
