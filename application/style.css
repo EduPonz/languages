@@ -3,12 +3,9 @@
 	}
 
 	body{
-	/*	background-image: url("bg4.jpg");
-		background-color: #cccccc
-		background-position: center;*/
 		height: 1000px;
 		background: blue;
-		background: linear-gradient(to bottom right, rgba(200, 255, 250, 0.6), rgba(25, 220, 200, 1));
+		background: linear-gradient(to bottom right, rgba(150, 205, 200, 0.8), rgb(15, 205, 200));
 	}
 
 	h2{
