@@ -13,6 +13,8 @@ function isCorrect() {
 
 	if (word == "Hej" && answer == "hello") {
 		document.getElementById("result").innerHTML = "GREAT JOB!";
+	} else {
+		document.getElementById("result").innerHTML = "WRONG!";
 	}
 
 }
