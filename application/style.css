@@ -3,23 +3,29 @@
 	}
 
 	body{
-		background-image: url("bg4.jpg");
+	/*	background-image: url("bg4.jpg");
 		background-color: #cccccc
-		background-position: center;
-
+		background-position: center;*/
+		height: 1000px;
+		background: blue;
+		background: linear-gradient(to bottom right, rgba(200, 255, 250, 0.6), rgba(25, 220, 200, 1));
 	}
 
 	h2{
 
 	}
 
-	p{
-		font-family:cursive; 
+	#word{
+		font-family:verdana; 
 		border: 1px solid black;
 		margin-top: 25px;
 		margin-bottom: 25px;
 		margin-right: 1100px;
 		margin-left: 2px;
+	}
+
+	#result{
+		font-family: courier;
 	}
 	hr{
 		margin-right: 1100px;
