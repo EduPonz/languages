@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="js/quiz.js"></script>
+		<!-- for calling the style sheet-->
+		<link rel="stylesheet" type="text/css" href="style.css"> 
+	</head>
+	<body onload="onCreate()" >
+		<h3 id= "signup_title"></h3>
+		<hr>
+		<form action= "/check.js">
+			<p type="text">Insert e_mail: <input type="text" name="username" id="username"><br></p>
+			<p type="text">Insert password:  <input type="text" name="password" id="password"><br></p>
+			<p type="text">Confirm password: <input type="text" name="confirm_password" id="confirm_password"><br></p>
+			<p type="text">Insert user name: <input type="text" name="e_mail" id="e_mail"><br></p>
+			<input type="button" onclick="insert_user()" value= "Save">
+		</form>
+	</body>
+</html>
