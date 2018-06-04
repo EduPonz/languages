@@ -6,14 +6,53 @@
 		<link rel="stylesheet" type="text/css" href="style.css"> 
 	</head>
 	<body onload="onCreate()" >
-		<h3 id= "signup_title"></h3>
-		<hr>
-		<form action= "/check.js">
-			<p type="text">Insert e_mail: <input type="text" name="username" id="username"><br></p>
-			<p type="text">Insert password:  <input type="text" name="password" id="password"><br></p>
-			<p type="text">Confirm password: <input type="text" name="confirm_password" id="confirm_password"><br></p>
-			<p type="text">Insert user name: <input type="text" name="e_mail" id="e_mail"><br></p>
-			<input type="button" onclick="insert_user()" value= "Save">
+		<h3 id="signup_title"></h3>
+		<form>
+			<label for="username">Username: </label>
+			<input type="text" name="username" id="username"><br>
+			<label for="password">Password: </label>
+			<input type="password" name="password" id="password"><br>
+			<label for="confirm_password">Confirm password: </label>
+			<input type="password" name="confirm_password" id="confirm_password"><br>
+			<label for="e_mail">E-mail: </label>
+			<input type="text" name="e_mail" id="e_mail"><br><br>
+			<input type="button" onclick="insert_user()" value="Sign up">
+			<!-- <input type="button" onclick="isCorrect()" value="Answer"> -->
+			<!-- <input type="button" onclick="seeAnswer()" value="See Answer"> -->
 		</form>
+
+		<p id="result"></p><br><br>
+		<hr>
+
+		<h3 id="loging_title"></h3>
+		<form>
+			<label for="username_login">Username: </label>
+			<input type="text" name="username_login" id="username_login"><br>
+			<label for="password_login">Password: </label>
+			<input type="password" name="password_login" id="password_login"><br><br>
+			<input type="button" onclick="check_login()" value="Log in">
+		</form>
+
+		<p id="result_login"></p><br><br>
+		<hr>
+
+		<h3 id="update_user_title"></h3>
+		<form>
+			<label for="update_username">Username: </label>
+			<input type="text" name="update_username" id="update_username"><br>
+			<label for="update_password">Password: </label>
+			<input type="password" name="update_password" id="update_password"><br>
+			<label for="update_new_username">New username: </label>
+			<input type="text" name="update_new_username" id="update_new_username"><br>
+			<label for="update_new_password">New password: </label>
+			<input type="password" name="update_new_password" id="update_new_password"><br>
+			<label for="update_new_confirm_pwd">Confirm new password: </label>
+			<input type="password" name="update_new_confirm_pwd" id="update_new_confirm_pwd"><br>
+			<label for="update_new_e_mail">New e-mail: </label>
+			<input type="text" name="update_new_e_mail" id="update_new_e_mail"><br><br>
+			<input type="button" onclick="update_user()" value="Update">
+		</form>
+
+		<p id="update_result"></p><br><br>
 	</body>
 </html>
