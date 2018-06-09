@@ -3,9 +3,11 @@
 """."""
 
 import cgi
+import logging
 import sys
 import sqlite3
 import uuid
+from logging.handlers import RotatingFileHandler
 
 TABLE_VERBS = 'verbs'
 COLUMN_ID = 'id'
@@ -33,6 +35,17 @@ COLUMN_USER_ID = 'user_id'
 COLUMN_USERNAME = 'username'
 COLUMN_PASSWORD = 'password'
 COLUMN_EMAIL = 'e_mail'
+
+log_location = '/var/www/html/languages/application/log/db_manager.log'
+logger = logging.getLogger('db_manager')
+handler = RotatingFileHandler(log_location, maxBytes=200000,
+                              backupCount=10)
+formatter = logging.Formatter('[%(asctime)s][%(name)s]' +
+                              '[%(levelname)s] %(message)s')
+
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 
 def output(content):
@@ -222,6 +235,7 @@ def insert_verb(infinitive, infinitive_eng, present, past,
 
 
 form = cgi.FieldStorage()
+logger.info('form {}'.format(form))
 output('form {}'.format(form))
 db_path = '/var/www/html/languages/application/database/danish.db'
 db = sqlite3.connect(db_path)
