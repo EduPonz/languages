@@ -6,6 +6,7 @@ window.onload = function() {
 	document.getElementById("btn_loggin").onclick = function() {log_in()}
 	document.getElementById("btn_update_user").onclick = function() {update_user()}
 	document.getElementById("btn_insert_verb").onclick = function() {insert_verb()}
+	document.getElementById("btn_update_verb").onclick = function() {update_verb()}
 	// document.getElementById("btn_answer").onclick = function() {isCorrect()}
 	// document.getElementById("btn_see_answer").onclick = function() {seeAnswer()}
 
@@ -15,7 +16,7 @@ window.onload = function() {
 		document.getElementById("loging_title").innerHTML = "Log in";
 		document.getElementById("update_user_title").innerHTML = "Update user";
 		document.getElementById("insert_verb_title").innerHTML = "Insert verb";
-		// create_tables();
+		document.getElementById("update_verb_title").innerHTML = "Update verb";
 	}
 
 	function isCorrect() {
@@ -90,7 +91,7 @@ window.onload = function() {
 		var username = document.getElementById("username_login").value;
 		var password = document.getElementById("password_login").value;
 
-		check_login(username, password);
+		login_request(username, password);
 		// document.getElementById("username_login").value = '';
 		// document.getElementById("password_login").value = '';
 	}
@@ -99,11 +100,11 @@ window.onload = function() {
 		document.getElementById("result_login").innerHTML = result.toString();
 	}
 
-	function check_login(username, password) {
+	function login_request(username, password) {
 		var timestamp = new Date().toUTCString();
 		type = 'check_login'
 		var data = {
-			":id": uuid,
+			":id": uuid(),
 			"data": {
 				"username": username,
 				"password": password
@@ -153,7 +154,7 @@ window.onload = function() {
 		var timestamp = new Date().toUTCString();
 		type = 'update_user'
 		var data = {
-			":id": uuid,
+			":id": uuid(),
 			"data": {
 				"username": username,
 				"password": password,
@@ -190,26 +191,27 @@ window.onload = function() {
 		var past = document.getElementById("verb_past").value.toLowerCase().trim();
 		var present_perfect = document.getElementById("verb_present_perf").value.toLowerCase().trim();
 		var infinitive_eng = document.getElementById("verb_infinitive_eng").value.toLowerCase().trim();
+		var topic = document.getElementById("verb_topic").value.toLowerCase().trim();
 
-		insert_verb_request(infinitive, present, past, present_perfect, infinitive_eng);
+		insert_verb_request(infinitive, present, past, present_perfect, infinitive_eng, topic);
 	}
 
 	function insert_verb_callback(result) {
 		document.getElementById("insert_verb_result").innerHTML = result;
 	}
 
-	function insert_verb_request(infinitive, present, past, present_perfect, infinitive_eng) {
+	function insert_verb_request(infinitive, present, past, present_perfect, infinitive_eng, topic) {
 		var timestamp = new Date().toUTCString();
 		type = 'insert_verb'
 		var data = {
-			":id": uuid,
+			":id": uuid(),
 			"data": {
 				"infinitive": infinitive,
 				"present": present,
 				"past": past,
 				"present_perfect": present_perfect,
-				"infinitive_eng": infinitive_eng
-
+				"infinitive_eng": infinitive_eng,
+				"topic": topic
 			},
 			"type": type,
 			"timestamp": timestamp,
@@ -229,6 +231,58 @@ window.onload = function() {
 			error: function(error) {
 				console.log("Problem sending test request. " + error);
 				insert_verb_callback(error);
+			}
+		})
+	}
+
+	function update_verb() {
+		var infinitive = document.getElementById("verb_infinitive_up").value.toLowerCase().trim();
+		var new_infinitive = document.getElementById("new_verb_infinitive").value.toLowerCase().trim();
+		var new_present = document.getElementById("new_verb_present").value.toLowerCase().trim();
+		var new_past = document.getElementById("new_verb_past").value.toLowerCase().trim();
+		var new_present_perfect = document.getElementById("new_verb_present_perf").value.toLowerCase().trim();
+		var new_infinitive_eng = document.getElementById("new_verb_infinitive_eng").value.toLowerCase().trim();
+
+		update_verb_request(infinitive, new_infinitive, new_present, new_past,
+							new_present_perfect, new_infinitive_eng);
+	}
+
+	function update_verb_callback(result) {
+		document.getElementById("update_verb_result").innerHTML = result;
+	}
+
+	function update_verb_request(infinitive, new_infinitive, new_present, new_past,
+							     new_present_perfect, new_infinitive_eng) {
+		var timestamp = new Date().toUTCString();
+		type = 'update_verb'
+		var data = {
+			":id": uuid(),
+			"data": {
+				"infinitive": infinitive,
+				"new_infinitive": new_infinitive,
+				"new_present": new_present,
+				"new_past": new_past,
+				"new_present_perfect": new_present_perfect,
+				"new_infinitive_eng": new_infinitive_eng
+			},
+			"type": type,
+			"timestamp": timestamp,
+		};
+
+		$.ajax({
+			url: ip + ':5000/update-verb',
+			method: 'POST',
+			data: JSON.stringify(data),
+			dataType: 'json',
+			headers: {'Content-type': 'application/json',},
+			success: function(response) {
+				console.log("Post data " + data['data']);
+				console.log("Flask response " + response['data']);
+				update_verb_callback(response['data']);
+			},
+			error: function(error) {
+				console.log("Problem sending test request. " + error);
+				update_verb_callback(error);
 			}
 		})
 	}

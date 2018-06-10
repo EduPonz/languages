@@ -23,6 +23,7 @@ FlaskUUID(app)
 CORS(app)
 
 
+# *********************** USERS METHODS *********************** #
 @app.route('/insert-user', methods=['POST'])
 def insert_user():
     """."""
@@ -61,6 +62,7 @@ def update_user():
     return jsonify({'data': result}), 201
 
 
+# *********************** VERBS METHODS *********************** #
 @app.route('/insert-verb', methods=['POST'])
 def insert_verb():
     """."""
@@ -70,7 +72,20 @@ def insert_verb():
     data = request.json['data'] if request.json['type'] == 'insert_verb' else ''
     if data:
         result = db.insert_verb(data['infinitive'], data['present'], data['past'],
-                                data['present_perfect'], data['infinitive_eng'])
+                                data['present_perfect'], data['infinitive_eng'], data['topic'])
+    return jsonify({'data': result}), 201
+
+
+@app.route('/update-verb', methods=['POST'])
+def update_verb():
+    """."""
+    print('Post request {}'.format(request.json))
+    logger.info('Post request {}'.format(request.json))
+
+    data = request.json['data'] if request.json['type'] == 'update_verb' else ''
+    if data:
+        result = db.update_verb(data['infinitive'], data['new_infinitive'], data['new_present'],
+                                data['new_past'], data['new_present_perfect'], data['new_infinitive_eng'])
     return jsonify({'data': result}), 201
 
 

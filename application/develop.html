@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- <script src="js/quiz.js" charset="UTF-8"></script> -->
-		<!-- <script language="JavaScript" type="text/javascript" src="js/query.js" charset="UTF-8"></script> -->
 		<script src="js/jquery.min.js"></script>
-		<script language="JavaScript" type="text/javascript" src="js/query.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/develop.js"></script>
 	</head>
-	<!-- <body onload="onCreate()"> -->
 	<body>
 
 		<h2 id="title"></h2>
@@ -22,8 +19,6 @@
 			<label for="e_mail">E-mail: </label>
 			<input type="text" name="e_mail" id="e_mail"><br><br>
 			<input type="button" id="btn_sign_up" value="Sign up">
-			<!-- <input type="button" id="btn_answer" value="Answer">
-			<input type="button" id="btn_see_answer" value="See Answer"> -->
 		</form>
 
 		<p id="result"></p><br><br> 
@@ -70,10 +65,31 @@
 			<input type="text" name="verb_present_perf" id="verb_present_perf"><br>
 			<label for="verb_infinitive_eng">Infinitive in english: </label>
 			<input type="text" name="verb_infinitive_eng" id="verb_infinitive_eng"><br>
+			<label for="verb_topic">Topic: </label>
+			<input type="text" name="verb_topic" id="verb_topic"><br>
 			<input type="button" id="btn_insert_verb" value="Insert"><br><br>
 		</form>
 
 		<p id="insert_verb_result"></p><br><br>
+
+		<h3 id="update_verb_title"></h3>
+		<form>
+			<label for="verb_infinitive_up">Infinitive: </label>
+			<input type="text" name="verb_infinitive_up" id="verb_infinitive_up"><br>
+			<label for="new_verb_infinitive">New Infinitive: </label>
+			<input type="text" name="new_verb_infinitive" id="new_verb_infinitive"><br>
+			<label for="new_verb_present">New Present: </label>
+			<input type="text" name="new_verb_present" id="new_verb_present"><br>
+			<label for="new_verb_past">New Past: </label>
+			<input type="text" name="new_verb_past" id="new_verb_past"><br>
+			<label for="new_verb_present_perf">New Present perfect: </label>
+			<input type="text" name="new_verb_present_perf" id="new_verb_present_perf"><br>
+			<label for="new_verb_infinitive_eng">New Infinitive in english: </label>
+			<input type="text" name="new_verb_infinitive_eng" id="new_verb_infinitive_eng"><br>
+			<input type="button" id="btn_update_verb" value="Update Verb"><br><br>
+		</form>
+
+		<p id="update_verb_result"></p><br><br>
 
 	</body>
 </html>

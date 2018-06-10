@@ -56,7 +56,6 @@ class DatabaseManager():
         self.COLUMN_PASSWORD = 'password'
         self.COLUMN_EMAIL = 'e_mail'
 
-        db_path = '/www/pages/database/fremco_database.db'
         db_path = '/var/www/html/languages/application/database/danish.db'
         self.db = sqlite3.connect(db_path)
         self.cursor = self.db.cursor()
@@ -175,6 +174,9 @@ class DatabaseManager():
                                     ' WHERE ' + self.COLUMN_USER_ID + ' = ?',
                                     params)
                 self.db.commit()
+                count = self.cursor.rowcount
+                if count > 0:
+                    self.logger.info('rows updated {}'.format(count))
                 return 'User updated'
             except Exception as e:
                 self.logger.warning('Cannot update user. Exception {}'.format(e))
@@ -217,10 +219,10 @@ class DatabaseManager():
             self.logger.warning('Cannot check verb availability. Exception {}'.format(e))
             return None
 
-    def insert_verb(self, infinitive, present, past, present_perfect, infinitive_eng):
+    def insert_verb(self, infinitive, present, past, present_perfect, infinitive_eng, topic):
         """."""
         if self.check_verb_availability(infinitive):
-            params = (infinitive, present, past, present_perfect, infinitive_eng)
+            params = (infinitive, present, past, present_perfect, infinitive_eng, topic)
             try:
                 # self.logger.info('insert_verb() 2')
                 self.db.execute('INSERT INTO ' + self.TABLE_VERBS + ' (' +
@@ -228,8 +230,9 @@ class DatabaseManager():
                                 self.COLUMN_PRESENT + ', ' +
                                 self.COLUMN_PAST + ', ' +
                                 self.COLUMN_PRESENT_PERFECT + ', ' +
-                                self.COLUMN_INFITIVE_ENGLISH + ') ' +
-                                ' VALUES (?,?,?,?,?)',
+                                self.COLUMN_INFITIVE_ENGLISH + ', ' +
+                                self.COLUMN_TOPIC + ') ' +
+                                ' VALUES (?,?,?,?,?,?)',
                                 params)
                 self.db.commit()
                 return 'Verb inserted in the database'
@@ -238,3 +241,30 @@ class DatabaseManager():
                 return 'Cannot insert verb'
         else:
             return 'Verb already exists'
+
+    def update_verb(self, infinitive, new_infinitive, new_present, new_past,
+                    new_present_perfect, new_infinitive_eng):
+        """."""
+        if not self.check_verb_availability(infinitive):
+            params = (new_infinitive, new_present, new_past, new_present_perfect,
+                      new_infinitive_eng, infinitive)
+            try:
+                self.cursor.execute('UPDATE ' + self.TABLE_VERBS +
+                                    ' SET ' +
+                                    self.COLUMN_INFITIVE + ' = ?, ' +
+                                    self.COLUMN_PRESENT + ' = ?, ' +
+                                    self.COLUMN_PAST + ' = ?,' +
+                                    self.COLUMN_PRESENT_PERFECT + ' = ?, ' +
+                                    self.COLUMN_INFITIVE_ENGLISH + ' = ? ' +
+                                    ' WHERE ' + self.COLUMN_INFITIVE + ' = ?',
+                                    params)
+                self.db.commit()
+                count = self.cursor.rowcount
+                if count > 0:
+                    self.logger.info('rows updated {}'.format(count))
+                return 'Verb updated'
+            except Exception as e:
+                self.logger.warning('Cannot update verb. Exception {}'.format(e))
+                return 'Cannot update verb'
+        else:
+            return 'The verb does not exist on the database'
