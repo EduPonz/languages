@@ -2,14 +2,16 @@
 <html>
 	<head>
 		<!-- <script src="js/quiz.js" charset="UTF-8"></script> -->
-		<script src="js/query.js" charset="UTF-8"></script>
+		<!-- <script language="JavaScript" type="text/javascript" src="js/query.js" charset="UTF-8"></script> -->
+		<script src="js/jquery.min.js"></script>
+		<script language="JavaScript" type="text/javascript" src="js/query.js"></script>
 	</head>
 	<!-- <body onload="onCreate()"> -->
 	<body>
 
 		<h2 id="title"></h2>
 
-<!--	<h3 id="signup_title"></h3>
+	<h3 id="signup_title"></h3>
 		<form>
 			<label for="username">Username: </label>
 			<input type="text" name="username" id="username"><br>
@@ -19,12 +21,12 @@
 			<input type="password" name="confirm_password" id="confirm_password"><br>
 			<label for="e_mail">E-mail: </label>
 			<input type="text" name="e_mail" id="e_mail"><br><br>
-			<input type="button" onclick="insert_user()" value="Sign up">
-			<input type="button" onclick="isCorrect()" value="Answer">
-			<input type="button" onclick="seeAnswer()" value="See Answer">
+			<input type="button" id="btn_sign_up" value="Sign up">
+			<!-- <input type="button" id="btn_answer" value="Answer">
+			<input type="button" id="btn_see_answer" value="See Answer"> -->
 		</form>
 
-		<p id="result"></p><br><br> -->
+		<p id="result"></p><br><br> 
 
 		<h3 id="loging_title"></h3>
 		<form>
@@ -37,7 +39,7 @@
 
 		<p id="result_login"></p><br><br>
 
-		<!-- <h3 id="update_user_title"></h3>
+		<h3 id="update_user_title"></h3>
 		<form>
 			<label for="update_username">Username: </label>
 			<input type="text" name="update_username" id="update_username"><br>
@@ -51,7 +53,7 @@
 			<input type="password" name="update_new_confirm_pwd" id="update_new_confirm_pwd"><br>
 			<label for="update_new_e_mail">New e-mail: </label>
 			<input type="text" name="update_new_e_mail" id="update_new_e_mail"><br><br>
-			<input type="button" onclick="update_user()" value="Update">
+			<input type="button" id="btn_update_user" value="Update">
 		</form>
 
 		<p id="update_result"></p><br><br>
@@ -68,10 +70,10 @@
 			<input type="text" name="verb_present_perf" id="verb_present_perf"><br>
 			<label for="verb_infinitive_eng">Infinitive in english: </label>
 			<input type="text" name="verb_infinitive_eng" id="verb_infinitive_eng"><br>
-			<input type="button" onclick="insert_verb()" value="Insert"><br><br>
+			<input type="button" id="btn_insert_verb" value="Insert"><br><br>
 		</form>
 
-		<p id="insert_verb_result"></p><br><br> -->
+		<p id="insert_verb_result"></p><br><br>
 
 	</body>
 </html>
